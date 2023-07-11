@@ -1,10 +1,44 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="assets/css/reset.css">
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
 
     <body>
+        <header>
+            <h1>High Scores</h1>
+            <h1>Time: </h1>
+        </header>
+
+        <main>
+            <section class="quiz-container">
+                <section id="start">
+                    <h4>You will be given 60 seconds to answer 5 questions about JavaScript. Wrong answers will deduct 5 seconds.</h4>
+                    <h4 id="press-start-text">Press start to begin!</h4>
+                    <button type="button" id="start-button">Start</button>
+
+                </section>
+                
+
+                <section class="questions" id="question-1">
+                    <h2 class="question-content">Question 1:</h2>
+                    <h3 class="question-content">Which is not a data type in JavaScript?</h3>
+                    <button type="button" class="answer-button" data-bool="false">Boolean</button>
+                    <button type="button" class="answer-button" data-bool="false">String</button>
+                    <button type="button" class="answer-button" data-bool="false">Null</button>
+                    <button type="button" class="answer-button" data-bool="true">Loop</button>
+                </section>
+
+                <section></section>
+                <section></section>
+                <section></section>
+                <section></section>
+            </section>
+        </main>
+
+        <footer></footer>
         
         <script src="assets/js/script.js"></script>
     </body>
