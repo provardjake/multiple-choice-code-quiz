@@ -9,6 +9,7 @@ header{
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 50px;
+    margin-bottom: 10%;
 }
 
 main{
@@ -53,7 +54,7 @@ button:hover{
 .questions{
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 25%;
+    
 }
 
 .question-content{
