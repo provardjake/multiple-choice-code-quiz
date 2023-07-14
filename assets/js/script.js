@@ -10,8 +10,14 @@ var answerButton = document.querySelector(".answer-button");
 var isCorrect = document.querySelector(".correct");
 var isIncorrect = document.querySelector(".incorrect");
 var timer = document.querySelector("#timer");
+var scoreForm = document.querySelector("#final-score");
+var initialsButton = document.querySelector("#initials-button");
+var initials = document.querySelector("#initials-form");
+var scoreText = document.querySelector("#score");
 var finalScore = 0;
 var quizEnd = false;
+var timeLeft;
+var score = 0;
 
 //this function hides the questions and the answers choices for the buttons
 function hideQuestions(){
@@ -28,6 +34,10 @@ function hideCorrect(){
     isIncorrect.style.display = "none";
 }
 
+function hideForm(){
+    scoreForm.style.display = "none";
+}
+
 //calls the quiz start funciton when start is clicked
 startButton.addEventListener("click", function(){
     start.style.display = "none";
@@ -41,7 +51,7 @@ function quizStart(){
 }
 
 function startTime(){
-    var timeLeft = 60;
+    timeLeft = 60;
 
     var timeInterval = setInterval(function(){
         timeLeft = timeLeft - 1;
@@ -64,6 +74,17 @@ function startTime(){
 function quizOver(time){
     hideQuestions();
     var timeLeft = time;
+    finalScore = timeLeft +finalScore;
+    scoreForm.style.display = "flex";
+    scoreText.textContent = "Your final score is: "+finalScore;
+    getInitials();
+    console.log(getInitials);
+}
+
+function getInitials(){
+    initialsButton.addEventListener("click", function(event){
+        return initialsButton.value;
+    })
 }
 
 
@@ -76,6 +97,7 @@ questionOne.addEventListener("click", function(event){
         questionTwo.style.display = "flex";
         isCorrect.style.display = "flex";
         setTimeout(hideCorrect, 3000);
+        finalScore = finalScore + 5;
         return;
     }
     else{
@@ -83,6 +105,7 @@ questionOne.addEventListener("click", function(event){
         questionTwo.style.display = "flex";
         isIncorrect.style.display = "flex";
         setTimeout(hideCorrect, 3000);
+        timeLeft = timeLeft - 5;
         return;
     }
 });
@@ -95,6 +118,7 @@ questionTwo.addEventListener("click", function(event){
         questionTwo.style.display = "none";
         questionThree.style.display = "flex";
         isCorrect.style.display = "flex";
+        finalScore = finalScore + 5;
         setTimeout(hideCorrect, 3000);
         return;
     }
@@ -103,6 +127,7 @@ questionTwo.addEventListener("click", function(event){
         questionThree.style.display = "flex";
         isIncorrect.style.display = "flex";
         setTimeout(hideCorrect, 3000);
+        timeLeft = timeLeft - 5;
         return;
     }
 });
@@ -115,6 +140,7 @@ questionThree.addEventListener("click", function(event){
         questionThree.style.display = "none";
         questionFour.style.display = "flex";
         isCorrect.style.display = "flex";
+        finalScore = finalScore + 5;
         setTimeout(hideCorrect, 3000);
         return;
     }
@@ -123,6 +149,7 @@ questionThree.addEventListener("click", function(event){
         questionFour.style.display = "flex";
         isIncorrect.style.display = "flex";
         setTimeout(hideCorrect, 3000);
+        timeLeft = timeLeft - 5;
         return;
     }
 });
@@ -135,6 +162,7 @@ questionFour.addEventListener("click", function(event){
         questionFour.style.display = "none";
         questionFive.style.display = "flex";
         isCorrect.style.display = "flex";
+        finalScore = finalScore + 5;
         setTimeout(hideCorrect, 3000);
         return;
     }
@@ -143,6 +171,7 @@ questionFour.addEventListener("click", function(event){
         questionFive.style.display = "flex";
         isIncorrect.style.display = "flex";
         setTimeout(hideCorrect, 3000);
+        timeLeft = timeLeft - 5;
         return;
     }
 });
@@ -156,6 +185,7 @@ questionFive.addEventListener("click", function(event){
         //questionTwo.style.display = "flex";
         isCorrect.style.display = "flex";
         setTimeout(hideCorrect, 3000);
+        finalScore = finalScore + 5;
         quizEnd = true;
         return;
     }
@@ -165,10 +195,13 @@ questionFive.addEventListener("click", function(event){
         isIncorrect.style.display = "flex";
         setTimeout(hideCorrect, 3000);
         quizEnd = true;
+        timeLeft = timeLeft - 5;
         return;
     }
 });
 
+
+
 hideQuestions();
 hideCorrect();
-hideTimeUpText();
+hideForm();
