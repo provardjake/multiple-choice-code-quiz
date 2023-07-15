@@ -117,3 +117,15 @@ button:hover{
     height: 50px;
     font-weight: bold;
 }
+
+#score-1{
+    margin: 5%;
+}
+
+#go-back{
+    margin: 5%;
+}
+
+#clear-score{
+    margin: 5%;
+}

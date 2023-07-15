@@ -12,12 +12,19 @@ var isIncorrect = document.querySelector(".incorrect");
 var timer = document.querySelector("#timer");
 var scoreForm = document.querySelector("#final-score");
 var initialsButton = document.querySelector("#initials-button");
-var initials = document.querySelector("#initials-form");
+var initialsText = document.querySelector("#initials-text")
 var scoreText = document.querySelector("#score");
+var scoreButton = document.querySelector(".score-button");
+var highScores = document.querySelector("#high-scores");
+var scoreOne = document.querySelector("#score-1");
+var goBackButton = document.querySelector("#go-back");
+var clearScoreButton = document.querySelector("#clear-score");
 var finalScore = 0;
 var quizEnd = false;
 var timeLeft;
 var score = 0;
+var initials = "";
+
 
 //this function hides the questions and the answers choices for the buttons
 function hideQuestions(){
@@ -34,8 +41,14 @@ function hideCorrect(){
     isIncorrect.style.display = "none";
 }
 
+//hides the form to save initials
 function hideForm(){
     scoreForm.style.display = "none";
+}
+
+//hides the high scores
+function hideScores(){
+    highScores.style.display = "none";
 }
 
 //calls the quiz start funciton when start is clicked
@@ -44,12 +57,16 @@ startButton.addEventListener("click", function(){
     quizStart();
 })
 
-
+//starts the quiz and timer
 function quizStart(){
     questionOne.style.display = "flex";
+    timeLeft = 60;
+    quizEnd = false;
+    finalScore = 0;
     startTime();
 }
 
+//sets a timer for 60 seconds
 function startTime(){
     timeLeft = 60;
 
@@ -71,22 +88,70 @@ function startTime(){
 
 }
 
+//tells your finals score and save your score and initials 
 function quizOver(time){
     hideQuestions();
     var timeLeft = time;
     finalScore = timeLeft +finalScore;
     scoreForm.style.display = "flex";
     scoreText.textContent = "Your final score is: "+finalScore;
-    getInitials();
-    console.log(getInitials);
+
 }
 
-function getInitials(){
-    initialsButton.addEventListener("click", function(event){
-        return initialsButton.value;
-    })
+
+//saves your intials when you click the submit button
+initialsButton.addEventListener("click", function(){
+    initials = initialsText.value;
+    saveScore();
+    hideForm();
+    start.style.display = "flex";
+});
+
+//only stores the highest score unless no score is set
+function saveScore(){
+    var score = {
+        initials: initials,
+        score: finalScore,
+    }
+
+    var lastScore = JSON.parse(localStorage.getItem("score"));
+
+    if (lastScore === null || lastScore.score < finalScore){
+        localStorage.setItem("score", JSON.stringify(score));
+    }    
+    renderScores();
 }
 
+//displays the high score
+scoreButton.addEventListener("click", function(){
+    hideForm();
+    hideQuestions();
+    start.style.display = "none";
+    highScores.style.display = "flex";
+    renderScores();
+});
+
+//go back to the start
+goBackButton.addEventListener("click", function(){
+    hideScores();
+    start.style.display = "flex";
+});
+
+//clears the local storage of the score
+clearScoreButton.addEventListener("click", function (){
+    localStorage.clear();
+    scoreOne.textContent = "";
+});
+
+//renders the high score
+function renderScores(){
+    var newScore = JSON.parse(localStorage.getItem("score"));
+
+    scoreOne.textContent = newScore.initials + "- "+newScore.score;
+}
+//the five event listeners below run through the quiz with every button click
+//They also add 5 points to your score for each correct answer and subtract
+//5 seconds from each incorrect answer. 
 
 questionOne.addEventListener("click", function(event){
     var element = event.target;
@@ -182,7 +247,6 @@ questionFive.addEventListener("click", function(event){
 
     if (state == "true"){
         questionFive.style.display = "none";
-        //questionTwo.style.display = "flex";
         isCorrect.style.display = "flex";
         setTimeout(hideCorrect, 3000);
         finalScore = finalScore + 5;
@@ -191,7 +255,6 @@ questionFive.addEventListener("click", function(event){
     }
     else{
         questionFive.style.display = "none";
-        //questionTwo.style.display = "flex";
         isIncorrect.style.display = "flex";
         setTimeout(hideCorrect, 3000);
         quizEnd = true;
@@ -205,3 +268,4 @@ questionFive.addEventListener("click", function(event){
 hideQuestions();
 hideCorrect();
 hideForm();
+hideScores();

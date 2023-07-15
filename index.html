@@ -9,7 +9,7 @@
 
     <body>
         <header>
-            <h1>High Scores</h1>
+            <button class="score-button">See High Score</button>
             <h1 id="timer">Time: 60</h1>
         </header>
 
@@ -20,7 +20,6 @@
                     Each correct question will award 5 points. Leftover time will award 1 point per extra second.</h4>
                     <h4 id="press-start-text">Press start to begin!</h4>
                     <button type="button" id="start-button">Start</button>
-
                 </section>
                 
 
@@ -75,14 +74,18 @@
                 </section>
 
                 <section class="questions" id="final-score">
-                    <form id="initials-form">
-                        <h2 id="score">Your final score is: </h2>
-                        <label>Enter your initials to save your score: </label>
-                        <input id="initials-text" type="text">
-                        <input id="initials-button" type="submit">
-                    </form>
+                    <h2>Game Over</h2>
+                    <h2 id="score">Your final score is: </h2>
+                    <label>Enter your initials to save your score: </label>
+                    <input id="initials-text" type="text">
+                    <input id="initials-button" type="submit">
                 </section>
 
+                <section class="questions" id="high-scores">
+                    <h2 id="score-1"></h2>
+                    <button id="go-back">Go back</button>
+                    <button id="clear-score">Clear Score</button>
+                </section>
             </section>
         </main>
 
